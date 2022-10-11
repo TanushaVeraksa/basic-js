@@ -15,10 +15,12 @@ function getCommonCharacterCount(s1, s2) {
   let a1 = s1.split('');
   let a2 = s2.split('');
   let n = 0;
+
   for(let i = 0; i<a1.length; i++) {
-     if(a2.indexOf(a1[i]) != -1) {
-        n++;
-     }
+      if(a2.indexOf(a1[i]) >= 0) {
+          n++;
+          a2.splice(a2.indexOf(a1[i]), 1);
+      }
   }
   return n;
 }
