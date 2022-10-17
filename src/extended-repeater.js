@@ -15,39 +15,6 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-//  function repeater(str, options) {
-//   let newStr = String(str);
-//   let result = '';
-//   if(options.separator === undefined) {
-//     options.separator = '+';
-//   }
-//   if(options.additionSeparator === undefined) {
-//     options.additionSeparator = '|';
-//   }
-//   if(options.repeatTimes === undefined &&  options.additionRepeatTimes === undefined) {
-//     result = newStr + options.addition;
-//   }
-//   if(options.repeatTimes && options.additionRepeatTimes === undefined) {
-//     for(let i = 0; i<options.repeatTimes; i++) {
-//         result += newStr + options.separator;
-//     }
-//     result = result.split(options.separator).slice(0, options.repeatTimes).join(options.separator);
-//   }
-//   if(options.repeatTimes && options.additionRepeatTimes) {
-//     let res1 = '';
-//     for(let i = 0; i<options.additionRepeatTimes; i++) {
-//         res1 += newStr + options.addition + options.additionSeparator;
-//     }
-   
-//     res1 =  res1.split(options.additionSeparator).slice(0, options.additionRepeatTimes).join(options.additionSeparator);
-//     let res2 = '';
-//     for(let i = 0; i<options.repeatTimes; i++) {
-//         res2 += res1 + options.separator;
-//     }
-//     result = res2.split(options.separator).slice(0, options.repeatTimes).join(options.separator);
-//   }
-//   return result;
-// }
 
 function repeater(str, options) {
   function h(add, separator, length=1) {
@@ -87,7 +54,7 @@ function repeater(str, options) {
   let current = h(String(options.addition), String(options.additionSeparator), options.additionRepeatTimes);
   let sec = h(current, String(options.separator), options.repeatTimes);
   let res = h2(String(str), String(options.separator), sec, options.repeatTimes);
-  if(!options.separator && !options.additionSeparator) {
+  if(!options.separator) {
      res = h3(String(str), String(options.separator), current, options.repeatTimes);
   }
   return res;
