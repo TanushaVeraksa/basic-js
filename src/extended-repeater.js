@@ -62,12 +62,12 @@ function repeater(str, options) {
     }
     return res.split(s).filter((elem)=> elem != '' && elem != 'undefined').join(s);
   }
-  function h2(str, separator, curr, length) {
+  function h2(str, separator, curr, length=1) {
     let s = separator === 'undefined' ? '+' : separator;
     let tmp = curr.split(s);
     let res = '';
     for(let i = 0; i<length; i++) {
-      if(tmp[i] === 'undefined') {
+      if(tmp[i] === undefined) {
         res +=  str + s;
       } else {
         res += str + tmp[i] + s;
@@ -75,9 +75,22 @@ function repeater(str, options) {
     }
     return res.split(s).filter((elem)=> elem != '' && elem != 'undefined').join(s);
   }
+  function h3(str, separator, curr, length) {
+    let s = separator === 'undefined' ? '+' : separator;
+    let tmp = curr.split(s);
+    let res = '';
+    for(let i = 0; i<length; i++) {
+        res += str + tmp[0] + s;
+    }
+    return res.split(s).filter((elem)=> elem != '' && elem != 'undefined').join(s);
+  }
   let current = h(String(options.addition), String(options.additionSeparator), options.additionRepeatTimes);
   let sec = h(current, String(options.separator), options.repeatTimes);
-  return h2(String(str), String(options.separator), sec, options.repeatTimes);
+  let res = h2(String(str), String(options.separator), sec, options.repeatTimes);
+  if(!options.separator && !options.additionSeparator) {
+     res = h3(String(str), String(options.separator), current, options.repeatTimes);
+  }
+  return res;
 }
 
 module.exports = {
